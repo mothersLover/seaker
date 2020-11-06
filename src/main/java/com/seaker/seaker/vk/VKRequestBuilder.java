@@ -88,7 +88,8 @@ public class VKRequestBuilder {
         }
 
         private String generateCode() throws UnsupportedEncodingException {
-            return URLEncoder.encode(String.format(code, city, sex, ageFrom, ageTo, month, offset), StandardCharsets.UTF_8.toString());
+            return URLEncoder.encode(String.format(code, city, sex, ageFrom, ageTo, month, offset),
+                    StandardCharsets.UTF_8.toString());
         }
 
         public VKRequestBuilder build() throws UnsupportedEncodingException {

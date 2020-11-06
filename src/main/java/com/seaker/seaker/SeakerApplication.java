@@ -1,7 +1,5 @@
 package com.seaker.seaker;
 
-import com.seaker.seaker.vk.CodeReader;
-import com.seaker.seaker.vk.VKRequestBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

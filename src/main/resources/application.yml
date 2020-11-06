@@ -8,4 +8,24 @@ vk:
     - 996bc17aa7ab72eebb6f1ebdffa2d9d8c2c831b34b245b0ee91dc846d525c03facf6a94a2d01ebd9a87c8
     - c4745b1288fc21cec7e924c0720ac06ccbaa46b790277530132e90b992ea6584a3e2d3ec1edad6f4f3fec
     - f04f3b520bbe1d717f9e065d35660b7db061f33b9cdefca0cdb17d3556197c3d55b21815dd7e9a6c23ea5
-
+    - b6a8ee15f5819bc328d2feb1b24e047549dd018012518e41e49681aa108395a76b47465a3d7049b3f966b
+    - c36f80be00fdd4228126db8a20fe788e3330b195a7e6d8d319fed392f572821e9ca66b1dc531688053a5e
+  cities:
+    2: Saint Petersburg
+    1: Moscow
+    3: Volgograd
+    37: Vladivostok
+    153: Khabarovsk
+    60: Kazan
+    61: Kaliningrad
+    72: Krasnodar
+    73: Krasnoyarsk
+    95: Nizhny Novgorod
+    99: Novosibirsk
+    104: Omsk
+    110: Perm
+    119: Rostov-on-Don
+    123: Samara
+    151: Ufa
+    158: Chelyabinsk
+    21: Armavir

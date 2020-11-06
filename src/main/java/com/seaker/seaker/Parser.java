@@ -14,7 +14,7 @@ import java.util.Map;
 import static com.seaker.seaker.SeakerConstant.*;
 
 public class Parser {
-    private VKProperties vkProperties;
+    private final VKProperties vkProperties;
 
     public Parser(VKProperties vkProperties) {
         this.vkProperties = vkProperties;
