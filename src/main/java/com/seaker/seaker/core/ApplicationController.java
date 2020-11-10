@@ -1,5 +1,6 @@
-package com.seaker.seaker;
+package com.seaker.seaker.core;
 
+import com.seaker.seaker.vk.parser.LeftsInCityParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
@@ -11,11 +12,11 @@ import java.io.UnsupportedEncodingException;
 public class ApplicationController {
 
 
-    private Parser parser;
+    private LeftsInCityParser leftsInCityParser;
 
     @Autowired
-    public ApplicationController(Parser parser) {
-        this.parser = parser;
+    public ApplicationController(LeftsInCityParser leftsInCityParser) {
+        this.leftsInCityParser = leftsInCityParser;
     }
 
     @EventListener({ContextRefreshedEvent.class})
@@ -38,6 +39,6 @@ public class ApplicationController {
 //        collectForCity("123", "Samara");
 //        collectForCity("151", "Ufa");
 //        collectForCity("158", "Chelyabinsk");
-        parser.collectForCity("21", "Армавир", 16, 50);
+        leftsInCityParser.collectForCity("2", "Saint Petersburg", 16, 35);
     }
 }

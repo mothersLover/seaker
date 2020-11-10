@@ -1,6 +1,8 @@
 package com.seaker.seaker.configuration;
 
-import com.seaker.seaker.Parser;
+import com.seaker.seaker.core.DataSaver;
+import com.seaker.seaker.vk.parser.LeftsInCityParser;
+import com.seaker.seaker.core.SystemOutDataSaver;
 import com.seaker.seaker.properties.VKProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +11,12 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationConfiguration {
 
     @Bean
-    public Parser parser(VKProperties vkProperties) {
-        return new Parser(vkProperties);
+    public DataSaver dataSaver() {
+        return new SystemOutDataSaver();
+    }
+
+    @Bean
+    public LeftsInCityParser parser(VKProperties vkProperties, DataSaver dataSaver) {
+        return new LeftsInCityParser(vkProperties, dataSaver);
     }
 }

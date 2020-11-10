@@ -6,13 +6,13 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
-public class VKRequestBuilder {
+public class RetrieveAllLeftsFromCityVKRequest {
     private final String request;
     private final String code;
     private final String template;
     private final String token;
 
-    private VKRequestBuilder(String template, String code, String token) {
+    private RetrieveAllLeftsFromCityVKRequest(String template, String code, String token) {
         this.template = Objects.requireNonNull(template);
         this.code = Objects.requireNonNull(code);
         this.token = Objects.requireNonNull(token);
@@ -92,8 +92,8 @@ public class VKRequestBuilder {
                     StandardCharsets.UTF_8.toString());
         }
 
-        public VKRequestBuilder build() throws UnsupportedEncodingException {
-            return new VKRequestBuilder(template, generateCode(), token);
+        public RetrieveAllLeftsFromCityVKRequest build() throws UnsupportedEncodingException {
+            return new RetrieveAllLeftsFromCityVKRequest(template, generateCode(), token);
         }
     }
 }

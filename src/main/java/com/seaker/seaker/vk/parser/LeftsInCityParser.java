@@ -1,10 +1,13 @@
-package com.seaker.seaker;
+package com.seaker.seaker.vk.parser;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.seaker.seaker.SeakerConstant;
+import com.seaker.seaker.core.DataSaver;
+import com.seaker.seaker.core.SystemOutDataSaver;
 import com.seaker.seaker.properties.VKProperties;
-import com.seaker.seaker.vk.VKRequestBuilder;
+import com.seaker.seaker.vk.RetrieveAllLeftsFromCityVKRequest;
 
 import java.io.*;
 import java.net.URL;
@@ -13,44 +16,48 @@ import java.util.Map;
 
 import static com.seaker.seaker.SeakerConstant.*;
 
-public class Parser {
+public class LeftsInCityParser {
     private final VKProperties vkProperties;
+    private final DataSaver dataSaver;
 
-    public Parser(VKProperties vkProperties) {
+    public LeftsInCityParser(VKProperties vkProperties, DataSaver dataSaver) {
         this.vkProperties = vkProperties;
+        this.dataSaver = dataSaver;
     }
 
     public void collectForCity(String cityCode, String cityName, int ageFrom, int ageTo) throws UnsupportedEncodingException {
-        System.out.println("##################################################################################");
-        System.out.println(cityName + " коммунисты и социалисты от " + ageFrom + " до " + ageTo);
-        String code = SeakerConstant.code;
-        VKRequestBuilder.Builder request = VKRequestBuilder.builder();
-        request.setCity(cityCode)
-                .setCode(code)
-                .setTemplate(vkProperties.getTemplate())
-                .setToken(vkProperties.getToken());
-        Map<String, Map<String, String>> cityResult = new HashMap<>();
-        StringBuilder allResultForCity = new StringBuilder();
-        scanForMen(ageFrom, ageTo, request, cityResult, allResultForCity);
-        scanForWomen(ageFrom, ageTo, request, cityResult, allResultForCity);
-        System.out.println(cityName + " : " + allResultForCity);
+        try {
+            dataSaver.init(cityName + " коммунисты и социалисты от " + ageFrom + " до " + ageTo);
+            RetrieveAllLeftsFromCityVKRequest.Builder request = RetrieveAllLeftsFromCityVKRequest.builder();
+            request.setCity(cityCode)
+                    .setCode(SeakerConstant.code)
+                    .setTemplate(vkProperties.getTemplate())
+                    .setToken(vkProperties.getToken());
+            Map<String, Map<String, String>> cityResult = new HashMap<>();
+            StringBuilder allResultForCity = new StringBuilder();
+            scanForMen(ageFrom, ageTo, request, cityResult, allResultForCity);
+            scanForWomen(ageFrom, ageTo, request, cityResult, allResultForCity);
+            dataSaver.save(cityName + " : " + allResultForCity);
+        } finally {
+            dataSaver.release();
+        }
     }
 
-    private void scanForWomen(int ageFrom, int ageTo, VKRequestBuilder.Builder request, Map<String, Map<String, String>> cityResult, StringBuilder allResultForCity) throws UnsupportedEncodingException {
-        System.out.println("Женщины");
+    private void scanForWomen(int ageFrom, int ageTo, RetrieveAllLeftsFromCityVKRequest.Builder request, Map<String, Map<String, String>> cityResult, StringBuilder allResultForCity) throws UnsupportedEncodingException {
+        dataSaver.save("Женщины");
         cityResult.put(FEMALE_SEX_ID, new HashMap<>());
         request.setSex(FEMALE_SEX_ID);
         scanAge(ageFrom, ageTo, request, cityResult, allResultForCity, FEMALE_SEX_ID);
     }
 
-    private void scanForMen(int ageFrom, int ageTo, VKRequestBuilder.Builder request, Map<String, Map<String, String>> cityResult, StringBuilder allResultForCity) throws UnsupportedEncodingException {
-        System.out.println("Мужчины");
+    private void scanForMen(int ageFrom, int ageTo, RetrieveAllLeftsFromCityVKRequest.Builder request, Map<String, Map<String, String>> cityResult, StringBuilder allResultForCity) throws UnsupportedEncodingException {
+        dataSaver.save("Мужчины");
         cityResult.put(MALE_SEX_ID, new HashMap<>());
         request.setSex(MALE_SEX_ID);
         scanAge(ageFrom, ageTo, request, cityResult, allResultForCity, MALE_SEX_ID);
     }
 
-    private void scanAge(int ageFrom, int ageTo, VKRequestBuilder.Builder request, Map<String, Map<String, String>> cityResult,
+    private void scanAge(int ageFrom, int ageTo, RetrieveAllLeftsFromCityVKRequest.Builder request, Map<String, Map<String, String>> cityResult,
                          StringBuilder allResultForCity, String sexId) throws UnsupportedEncodingException {
         int iter = 0;
         int token = 1;
@@ -72,7 +79,7 @@ public class Parser {
                             iter = 0;
                             token++;
                         }
-                        VKRequestBuilder build = request.build();
+                        RetrieveAllLeftsFromCityVKRequest build = request.build();
                         String buildRequest = build.getRequest();
                         URL url = new URL(buildRequest);
                         InputStream inputStream = url.openStream();
@@ -97,7 +104,7 @@ public class Parser {
             Map<String, String> ageRes = cityResult.get(sexId);
             String ageBorders = age + " - ";
             ageRes.put(ageBorders, ageResult);
-            System.out.println(ageBorders + " : " + ageResult);
+            dataSaver.save(ageBorders + " : " + ageResult);
         }
     }
 }
