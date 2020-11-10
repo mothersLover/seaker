@@ -6,6 +6,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Controller;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 @Controller
@@ -20,7 +21,7 @@ public class ApplicationController {
     }
 
     @EventListener({ContextRefreshedEvent.class})
-    public void contextRefreshedEvent() throws UnsupportedEncodingException {
+    public void contextRefreshedEvent() throws IOException {
 //        collectForCity("2", "Saint Petersburg");
 //        collectForCity("1", "Moscow");
 //        collectForCity("10", "Volgograd");
