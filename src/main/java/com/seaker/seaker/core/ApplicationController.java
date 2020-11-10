@@ -1,5 +1,6 @@
 package com.seaker.seaker.core;
 
+import com.seaker.seaker.vk.CitiesEnum;
 import com.seaker.seaker.vk.parser.LeftsInCityParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -40,6 +41,6 @@ public class ApplicationController {
 //        collectForCity("123", "Samara");
 //        collectForCity("151", "Ufa");
 //        collectForCity("158", "Chelyabinsk");
-        leftsInCityParser.collectForCity("2", "Saint Petersburg", 16, 35);
+        leftsInCityParser.collectForCity(CitiesEnum.SAINT_PETERSBURG.getCode(), CitiesEnum.SAINT_PETERSBURG.getName(), 16, 35);
     }
 }
