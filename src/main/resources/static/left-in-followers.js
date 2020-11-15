@@ -1,8 +1,7 @@
-var c = API.friends.get({
-    "user_id": "6795569",
+var c = API.users.getFollowers({
+    "user_id": "26073292",
     "count": "333",
-    "order": "random",
-    "fields": "city,personal",
+    "fields": "city,bdate,personal",
     "offset": "0",
     "v": "5.122"
 });

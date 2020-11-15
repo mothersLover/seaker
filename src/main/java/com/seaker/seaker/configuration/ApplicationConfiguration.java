@@ -1,6 +1,7 @@
 package com.seaker.seaker.configuration;
 
 import com.seaker.seaker.core.DataSaver;
+import com.seaker.seaker.vk.parser.LeftsFromFriendsParser;
 import com.seaker.seaker.vk.parser.LeftsInCityParser;
 import com.seaker.seaker.core.SystemOutDataSaver;
 import com.seaker.seaker.properties.VKProperties;
@@ -16,7 +17,12 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public LeftsInCityParser parser(VKProperties vkProperties, DataSaver dataSaver) {
+    public LeftsInCityParser cityParser(VKProperties vkProperties, DataSaver dataSaver) {
         return new LeftsInCityParser(vkProperties, dataSaver);
+    }
+
+    @Bean
+    public LeftsFromFriendsParser friendsParser(VKProperties vkProperties, DataSaver dataSaver) {
+        return new LeftsFromFriendsParser(dataSaver, vkProperties);
     }
 }

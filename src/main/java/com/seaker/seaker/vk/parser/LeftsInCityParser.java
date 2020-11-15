@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.seaker.seaker.SeakerConstant;
 import com.seaker.seaker.core.DataSaver;
 import com.seaker.seaker.properties.VKProperties;
+import com.seaker.seaker.vk.CitiesEnum;
 import com.seaker.seaker.vk.RetrieveAllLeftsFromCityVKRequest;
 
 import java.io.BufferedReader;
@@ -14,8 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static com.seaker.seaker.SeakerConstant.*;
 
@@ -28,19 +28,19 @@ public class LeftsInCityParser {
         this.dataSaver = dataSaver;
     }
 
-    public void collectForCity(String cityCode, String cityName, int ageFrom, int ageTo) throws IOException {
+    public void collectForCity(CitiesEnum city, int ageFrom, int ageTo) throws IOException {
         try {
-            dataSaver.init(LocalDateTime.now() + "-" + cityName + "-коммунисты-и-социалисты-от-" + ageFrom + "-до-" + ageTo);
+            dataSaver.init(LocalDateTime.now() + "-" + city.getName() + "-коммунисты-и-социалисты-от-" + ageFrom + "-до-" + ageTo);
             RetrieveAllLeftsFromCityVKRequest.Builder request = RetrieveAllLeftsFromCityVKRequest.builder();
-            request.setCity(cityCode)
-                    .setCode(SeakerConstant.code)
+            request.setCity(city.getCode())
+                    .setCode(SeakerConstant.LEFT_IN_CITY_REQUEST_CODE)
                     .setTemplate(vkProperties.getTemplate())
                     .setToken(vkProperties.getToken());
             Map<String, Map<String, String>> cityResult = new HashMap<>();
             StringBuilder allResultForCity = new StringBuilder();
             scanForMen(ageFrom, ageTo, request, cityResult, allResultForCity);
             scanForWomen(ageFrom, ageTo, request, cityResult, allResultForCity);
-            dataSaver.save(cityName + " : " + allResultForCity);
+            dataSaver.save(city.getName() + " : " + allResultForCity);
         } finally {
             dataSaver.release();
         }
