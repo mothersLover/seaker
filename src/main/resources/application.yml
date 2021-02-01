@@ -1,4 +1,6 @@
 vk:
+  data:
+    output: file
   template: https://api.vk.com/method/execute?code=%s&access_token=%s&v=5.122
   token: cc1aa30ac91761b4f41109ffd2000c2da028fcc1a3c25b4e4d8ca3a2f78058ef20c89693ac568191e65df
   tokens:
@@ -11,6 +13,8 @@ vk:
     - b6a8ee15f5819bc328d2feb1b24e047549dd018012518e41e49681aa108395a76b47465a3d7049b3f966b
     - c36f80be00fdd4228126db8a20fe788e3330b195a7e6d8d319fed392f572821e9ca66b1dc531688053a5e
     - 1c7039e0c6247d9882ddd25b1e4b74512fa5ccb5b5c557c2e9868e3ca54169299c419c5498b8e5dac8832
+    - c8737080825caab5933577f504f64ef1a86ee8f03e77536734b75747dd18d1f42608555e3eda33f3ef09b
+    - 8e48801354bfc9edbcb49eb8191da76ef1a921da2eb043b72744c0ad34de4f5b1dd3785b1be4b3fbd49fd
   cities:
     2: Saint Petersburg
     1: Moscow

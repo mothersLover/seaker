@@ -8,9 +8,7 @@ public class FileDataSaver implements DataSaver {
 
     @Override
     public void init(String name) throws IOException {
-        try (FileOutputStream fileOutputStream = new FileOutputStream(name + ".txt")) {
-            this.fileOutputStream = fileOutputStream;
-        }
+        this.fileOutputStream = new FileOutputStream(name + ".txt");
     }
 
     @Override

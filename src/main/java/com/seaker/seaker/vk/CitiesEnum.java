@@ -1,6 +1,7 @@
 package com.seaker.seaker.vk;
 
 public enum CitiesEnum {
+    ARSENIEV("2435", "Арсеньев Приморский Край"),
     SAINT_PETERSBURG("2", "Saint Petersburg"),
     MOSCOW("1", "Moscow"),
     VOLGOGRAD("3", "Volgograd"),
