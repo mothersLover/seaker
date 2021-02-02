@@ -62,6 +62,7 @@ public class LeftsFromFriendsParser extends AbstractParser {
             dataSaver.save(city.getName() + " : " + newLefts.size() + " : " + newLefts.toString());
             return newLefts;
         } finally {
+            dataSaver.save("!!!!!!!!!!!!!!!!!!!!!!!!!!!THIS IS THE END!!!!!!!!!!!!!");
             dataSaver.release();
         }
     }

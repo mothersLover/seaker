@@ -2,7 +2,7 @@ vk:
   data:
     output: file
   template: https://api.vk.com/method/execute?code=%s&access_token=%s&v=5.122
-  token: cc1aa30ac91761b4f41109ffd2000c2da028fcc1a3c25b4e4d8ca3a2f78058ef20c89693ac568191e65df
+  token: f04f3b520bbe1d717f9e065d35660b7db061f33b9cdefca0cdb17d3556197c3d55b21815dd7e9a6c23ea5
   tokens:
     - cc1aa30ac91761b4f41109ffd2000c2da028fcc1a3c25b4e4d8ca3a2f78058ef20c89693ac568191e65df
     - cdafa2a0b93070f6f21e02861050f06ffb41983e41fb0d6fa5db324d8175eb3a7646ee44d6bd5d30a6be8

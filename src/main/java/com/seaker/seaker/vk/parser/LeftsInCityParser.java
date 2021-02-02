@@ -42,6 +42,7 @@ public class LeftsInCityParser {
             scanForWomen(ageFrom, ageTo, request, cityResult, allResultForCity);
             dataSaver.save(city.getName() + " : " + allResultForCity);
         } finally {
+            dataSaver.save("!!!!!!!!!!!!!!!!!!!!!!!!!!!THIS IS THE END!!!!!!!!!!!!!");
             dataSaver.release();
         }
     }
@@ -91,6 +92,9 @@ public class LeftsInCityParser {
                         while ((inputLine = in.readLine()) != null) {
                             JsonObject jsonObject = new Gson().fromJson(inputLine, JsonObject.class);
                             JsonElement responseForAge = jsonObject.get("response");
+                            if (responseForAge == null) {
+                                dataSaver.save("======================= ERROR - " + jsonObject.toString() + " ====================");
+                            }
                             String rawResponseForAge = responseForAge.toString();
                             String normalizedResponseForAge = rawResponseForAge.replace("\"", "");
                             allResultForCity.append(normalizedResponseForAge);
